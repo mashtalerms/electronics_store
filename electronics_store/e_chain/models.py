@@ -31,9 +31,12 @@ class BaseModelMixin(models.Model):
         abstract = True  # Помечаем класс как абстрактный – для него не будет таблички в БД
 
     title = models.CharField(blank=False, null=False, max_length=255)
-    contacts = models.ForeignKey(Contacts, on_delete=models.CASCADE, blank=True, null=True)
-    products = models.ForeignKey(Products, on_delete=models.CASCADE, blank=True, null=True)
-    staff = models.ForeignKey(Staff, on_delete=models.CASCADE, blank=True, null=True)
+    contacts = models.ManyToManyField(Contacts)
+    products = models.ManyToManyField(Products)
+    staff = models.ManyToManyField(Staff)
+    # contacts = models.ForeignKey(Contacts, on_delete=models.CASCADE, blank=True, null=True)
+    # products = models.ForeignKey(Products, on_delete=models.CASCADE, blank=True, null=True)
+    # staff = models.ForeignKey(Staff, on_delete=models.CASCADE, blank=True, null=True)
     # contacts = models.JSONField(null=True, blank=True)
     # products = models.JSONField(null=True, blank=True)
     # staff = models.JSONField(null=True, blank=True)
