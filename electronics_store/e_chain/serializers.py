@@ -36,14 +36,16 @@ class FactoryCreateSerializer(serializers.ModelSerializer):
     contacts = ContactsSerializer(read_only=True, many=True)
     products = ProductsSerializer(read_only=True, many=True)
     staff = StaffSerializer(read_only=True, many=True)
-
+    print(f"check kontacts from ser{contacts}")
     def create(self, validated_data):
+        print(f"data-check{validated_data}")
         contacts = validated_data.pop("contacts", None)
         products = validated_data.pop("products", None)
         staff = validated_data.pop("staff", None)
+        print(f"contacts-check{contacts}")
 
         factory, _ = Factory.objects.get_or_create(**validated_data)
-
+        print(f"factory-check{factory}")
         if factory:
 
             for contact in contacts:

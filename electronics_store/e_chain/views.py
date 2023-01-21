@@ -21,15 +21,18 @@ class FactoryCreateView(APIView):
     serializer_class = FactoryCreateSerializer
 
     def post(self, request):
-        factory_serializer = FactoryCreateSerializer(data=request.data, many=True)
-
-        if factory_serializer.is_valid():
+        # factory_serializer = FactoryCreateSerializer(data=request.data, many=True)
+        # print(request.data)
+        # for item in request.data:
+        #     print(item)
+        # if factory_serializer.is_valid():
             # for item in request.data:
-            factory_serializer = FactoryCreateSerializer(data=request.data)
-            factory_serializer.is_valid(raise_exception=True)
-            factory_serializer.save()
-            return Response("Created successfully", status=status.HTTP_201_CREATED)
-        else:
-            return Response({"status": "error", "data": factory_serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+        print(f"check data from view {request.data}")
+        factory_serializer = FactoryCreateSerializer(data=request.data)
+        factory_serializer.is_valid(raise_exception=True)
+        factory_serializer.save()
+        return Response("Created successfully", status=status.HTTP_201_CREATED)
+        # else:
+        #     return Response({"status": "error", "data": factory_serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
