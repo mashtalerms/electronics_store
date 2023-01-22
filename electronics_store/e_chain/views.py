@@ -36,3 +36,4 @@ class FactoryCreateView(APIView):
         #     return Response({"status": "error", "data": factory_serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
+#TODO попробовать создать записи в БД для мини моделей

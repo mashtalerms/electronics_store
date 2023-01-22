@@ -11,7 +11,7 @@ class Address(models.Model):
 
 class Contacts(models.Model):
     email = models.CharField(max_length=40, null=False, blank=False)
-    address = models.ForeignKey(Address, on_delete=models.CASCADE)
+    address = models.ManyToManyField(Address)
 
 
 class Products(models.Model):

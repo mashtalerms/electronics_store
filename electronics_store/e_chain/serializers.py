@@ -3,8 +3,6 @@ from rest_framework import serializers
 from .models import Factory, Address, Contacts, Products, Staff, BaseModelMixin
 
 
-#TODO сделать сериализаторы для всех подклассов и вставить их в общий BaseSer
-#TODO переписать ser https://stackoverflow.com/questions/66116353/use-django-rest-framework-serializer-to-save-json-requests-to-database
 
 
 class AddressSerializer(serializers.ModelSerializer):
@@ -33,10 +31,9 @@ class StaffSerializer(serializers.ModelSerializer):
 
 
 class FactoryCreateSerializer(serializers.ModelSerializer):
-    contacts = ContactsSerializer(read_only=True, many=True)
-    products = ProductsSerializer(read_only=True, many=True)
-    staff = StaffSerializer(read_only=True, many=True)
-    print(f"check kontacts from ser{contacts}")
+    contacts = ContactsSerializer()
+    products = ProductsSerializer()
+    staff = StaffSerializer()
     def create(self, validated_data):
         print(f"data-check{validated_data}")
         contacts = validated_data.pop("contacts", None)
@@ -46,6 +43,7 @@ class FactoryCreateSerializer(serializers.ModelSerializer):
 
         factory, _ = Factory.objects.get_or_create(**validated_data)
         print(f"factory-check{factory}")
+        factory.save()
         if factory:
 
             for contact in contacts:
@@ -65,7 +63,7 @@ class FactoryCreateSerializer(serializers.ModelSerializer):
             for person in staff:
                 person, _ = Staff.objects.get_or_create(**person)
                 factory.staff.add(person)
-
+        factory.save()
         return factory
 
     class Meta:
