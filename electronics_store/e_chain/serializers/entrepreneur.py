@@ -12,6 +12,13 @@ class EntrepreneurCreateSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class EntrepreneurUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Entrepreneur
+        fields = "__all__"
+        read_only_fields = ('debt',)
+
+
 class EntrepreneurSerializer(serializers.ModelSerializer):
     contacts = ContactSerializer()
     products = ProductSerializer()

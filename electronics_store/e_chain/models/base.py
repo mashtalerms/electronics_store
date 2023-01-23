@@ -18,6 +18,7 @@ class BaseModelMixin(models.Model):
 
     class Meta:
         abstract = True  # Помечаем класс как абстрактный – для него не будет таблички в БД
+        ordering = ["-id"]
 
     title = models.CharField(blank=False, null=False, max_length=255)
     staff = models.IntegerField(blank=True, null=True)
@@ -28,7 +29,7 @@ class BaseModelMixin(models.Model):
     supplier = models.PositiveSmallIntegerField(
         verbose_name="Поставщик", choices=Supplier.choices, null=True
     )
-    supplier_id = models.ForeignKey("self", on_delete=models.CASCADE, null=True)
+    supplier_id = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True)
 
     def save(self, *args, **kwargs):
         if not self.id:

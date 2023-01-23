@@ -12,6 +12,13 @@ class RetailCreateSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class RetailUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Retail
+        fields = "__all__"
+        read_only_fields = ('debt',)
+
+
 class RetailSerializer(serializers.ModelSerializer):
     contacts = ContactSerializer()
     products = ProductSerializer()

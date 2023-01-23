@@ -12,6 +12,13 @@ class FactoryCreateSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class FactoryUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Factory
+        fields = "__all__"
+        read_only_fields = ('debt',)
+
+
 class FactorySerializer(serializers.ModelSerializer):
     contacts = ContactSerializer()
     products = ProductSerializer()

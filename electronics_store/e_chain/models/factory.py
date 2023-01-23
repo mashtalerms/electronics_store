@@ -6,3 +6,4 @@ class Factory(BaseModelMixin):
     class Meta:
         verbose_name = "Фабрика"
         verbose_name_plural = "Фабрики"
+        ordering = ["id"]

@@ -12,6 +12,13 @@ class DistributorCreateSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class DistributorUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Distributor
+        fields = "__all__"
+        read_only_fields = ('debt',)
+
+
 class DistributorSerializer(serializers.ModelSerializer):
     contacts = ContactSerializer()
     products = ProductSerializer()
