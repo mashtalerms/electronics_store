@@ -1,3 +1,4 @@
+from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.viewsets import ModelViewSet
 
 from ..models.contact import Contact
@@ -9,6 +10,8 @@ class ContactViewSet(ModelViewSet):
     queryset = Contact.objects.all()
     serializer_class = ContactSerializer
     permission_classes = [IsActiveUser]
+    pagination_class = LimitOffsetPagination
+
 
     def get_serializer_class(self):
         if self.action == "list" or self.action == "retrieve":

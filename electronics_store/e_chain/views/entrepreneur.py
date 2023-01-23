@@ -1,3 +1,4 @@
+from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from django_filters import rest_framework as filters
@@ -18,6 +19,7 @@ class EntrepreneurViewSet(ModelViewSet):
     filterset_fields = ('contacts__address_country', 'products__id')
     filterset_class = EntrepreneurFilter
     permission_classes = [IsActiveUser]
+    pagination_class = LimitOffsetPagination
 
     def get_serializer_class(self):
         if self.action == "list" or self.action == "retrieve":
