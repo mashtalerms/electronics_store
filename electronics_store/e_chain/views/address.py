@@ -11,5 +11,3 @@ class AddressViewSet(ModelViewSet):
     serializer_class = AddressSerializer
     permission_classes = [IsActiveUser]
     pagination_class = LimitOffsetPagination
-
-

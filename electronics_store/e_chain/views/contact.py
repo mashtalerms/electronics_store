@@ -12,7 +12,6 @@ class ContactViewSet(ModelViewSet):
     permission_classes = [IsActiveUser]
     pagination_class = LimitOffsetPagination
 
-
     def get_serializer_class(self):
         if self.action == "list" or self.action == "retrieve":
             return ContactSerializer

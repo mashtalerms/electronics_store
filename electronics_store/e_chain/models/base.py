@@ -4,17 +4,17 @@ from django.db import models
 
 from .contact import Contact
 from .product import Product
-# from common.models import BaseModel
 
 
 class BaseModelMixin(models.Model):
 
     class Supplier(models.IntegerChoices):
-        factory = 1, "Завод"
-        distributor = 2, "Дистрибьютор"
-        dealership = 3, "Дилерский центр"
-        retail = 4, "Крупная розничная сеть"
-        entrepreneur = 5, "Индивидуальный предприниматель"
+        empty = 99, ""
+        factory = 0, "Завод"
+        distributor = 1, "Дистрибьютор"
+        dealership = 2, "Дилерский центр"
+        retail = 3, "Крупная розничная сеть"
+        entrepreneur = 4, "Индивидуальный предприниматель"
 
     class Meta:
         abstract = True  # Помечаем класс как абстрактный – для него не будет таблички в БД
@@ -26,10 +26,10 @@ class BaseModelMixin(models.Model):
     products = models.ForeignKey(Product, on_delete=models.CASCADE, blank=True, null=True)
     debt = models.FloatField(blank=True, null=True)
     created = models.DateTimeField(verbose_name="Дата создания", blank=True, null=True)
+    chain_position = models.SmallIntegerField(verbose_name="Уровень иерархии", null=True)
     supplier = models.PositiveSmallIntegerField(
         verbose_name="Поставщик", choices=Supplier.choices, null=True
     )
-    supplier_id = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True)
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -39,5 +39,3 @@ class BaseModelMixin(models.Model):
 
     def __str__(self):
         return self.title
-
-#TODO понять как сделать ссылку на suplier

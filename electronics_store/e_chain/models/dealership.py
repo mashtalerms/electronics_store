@@ -1,5 +1,4 @@
 from .base import BaseModelMixin
-from django.db import models
 
 
 class Dealership(BaseModelMixin):
