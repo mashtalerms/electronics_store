@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class Address(models.Model):
@@ -8,8 +9,8 @@ class Address(models.Model):
     house_number = models.IntegerField(null=False, blank=False)
 
     class Meta:
-        verbose_name = "Адрес"
-        verbose_name_plural = "Адреса"
+        verbose_name = _("Адрес")
+        verbose_name_plural = _("Адреса")
         ordering = ["id"]
 
     def __str__(self):

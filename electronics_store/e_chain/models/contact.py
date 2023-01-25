@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.utils.translation import gettext_lazy as _
 from .address import Address
 
 
@@ -8,8 +8,8 @@ class Contact(models.Model):
     address = models.ForeignKey(Address, on_delete=models.CASCADE, null=True, blank=True)
 
     class Meta:
-        verbose_name = "Контакт"
-        verbose_name_plural = "Контакты"
+        verbose_name = _("Контакт")
+        verbose_name_plural = _("Контакты")
         ordering = ["id"]
 
     def __str__(self):

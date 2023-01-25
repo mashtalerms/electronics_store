@@ -1,4 +1,5 @@
 from rest_framework.pagination import LimitOffsetPagination
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from django_filters import rest_framework as filters
@@ -17,7 +18,7 @@ class RetailViewSet(ModelViewSet):
     filter_backends = (filters.DjangoFilterBackend,)
     filterset_fields = ('contacts__address_country', 'products__id')
     filterset_class = RetailFilter
-    permission_classes = [IsActiveUser]
+    permission_classes = [IsAuthenticated, IsActiveUser]
     pagination_class = LimitOffsetPagination
 
     def get_serializer_class(self):
